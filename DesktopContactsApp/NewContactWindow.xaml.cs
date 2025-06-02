@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DesktopContactsApp.Classes;
+using SQLite;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace DesktopContactsApp
 {
@@ -27,8 +17,31 @@ namespace DesktopContactsApp
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             // Save Contact
+            Contact contact = new Contact()
+            {
+                Name = txtName.Text,
+                Email = txtEmail.Text,
+                Phone = txtPhone.Text,
+            };
+            string databasePath = App.GetDatabasePath();
+
+            InsertRecord(contact, databasePath);
 
             this.Close();
+        }
+
+        
+
+        private static void InsertRecord(Contact contact, string databasePath)
+        {
+            using SQLiteConnection connection = CrateDBConnection(databasePath);
+            connection.CreateTable<Contact>();
+            connection.Insert(contact);
+        }
+
+        private static SQLiteConnection CrateDBConnection(string databasePath)
+        {
+            return new SQLiteConnection(databasePath);
         }
     }
 }

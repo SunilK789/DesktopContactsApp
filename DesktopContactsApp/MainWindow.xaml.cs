@@ -20,5 +20,11 @@ namespace DesktopContactsApp
         {
             InitializeComponent();
         }
+
+        private void btnNewContact_Click(object sender, RoutedEventArgs e)
+        {
+            NewContactWindow newContactWindow = new NewContactWindow();
+            newContactWindow.ShowDialog();
+        }
     }
 }

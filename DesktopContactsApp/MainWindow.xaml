@@ -8,6 +8,7 @@
         Title="MainWindow" Height="450" Width="800">
     <StackPanel>
         <Button Content="New contact" Name="btnNewContact" Click="btnNewContact_Click"/>
+        <TextBox x:Name="searchTextbox" TextChanged="searchTextbox_TextChanged"/>
         <ListView x:Name="contactListView" Margin="0,5,0,0" Height="280">
             <ListView.ItemTemplate>
                 <DataTemplate>
